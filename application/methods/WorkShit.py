@@ -4,7 +4,7 @@ from openpyxl import load_workbook
 from copy import copy
 def Connect():
     try:
-        file = load_workbook('shit3.xlsx')
+        file = load_workbook('methods/shit3.xlsx')
         return file
         print('Подключение успешное ')
     except Exception as ex:
@@ -41,4 +41,4 @@ def AppendValue(sheet,coord,val):
 #font = openpyxl.styles.Font(name='Times New Roman', size=10)
 
 
-file.save('shit3.xlsx')
+#file.save('shit3.xlsx')

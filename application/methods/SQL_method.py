@@ -2,9 +2,9 @@ import sqlite3
 import pandas as pd
 
 try:
-    con = sqlite3.connect('..//Invent_3.db')
+    con = sqlite3.connect('Invent_3.db')
     cur = con.cursor()
-    print('БД успешно создана')
+    #print('БД успешно создана')
     try:
         Create = f"""CREATE TABLE IF NOT EXISTS full_table(
         Invent TEXT,
@@ -14,7 +14,7 @@ try:
         cur.execute(Create)
         con.commit()
     except:
-        print('Пиздец ')
+        print('Плохо ')
 except Exception as ex:
     print('Ошибка в подключении:  ',ex)
 
@@ -34,21 +34,20 @@ def CreateTable(num_kab):
 
     print('Таблица создана  .|.  ')
 
-def Append(num_kab_curent, Invent, Name, NumKab,Count):
+def Append(Invent, Name, NumKab, Count):
     try:
         rest = (Invent, Name, NumKab,Count)
-        cur.execute(f"INSERT INTO {'tab'+str(num_kab_curent)} VALUES(?,?,?,?);", rest)
-        con.commit()
         cur.execute(f"INSERT INTO full_table VALUES(?,?,?,?);", rest)
         con.commit()
         print('Данные занесены  .|.  ')
     except Exception as ex:
         print('Ошибка в добавлении: ', ex)
 
-def Show():
+def Show(num_kab):
     try:
-        cur.execute('SELECT * FROM tab1')
+        cur.execute(f'SELECT * FROM full_table WHERE NumKab = {num_kab}')
         data = cur.fetchall()
+        print(data)
         return data
     except Exception as ex:
         print('Ошибка в извлечении: ', ex)
@@ -105,12 +104,12 @@ def join_table(file_name_1, file_name_2):
     df = pd.DataFrame(data=data, columns=['invent', 'name', 'numkab', 'count'])
     print(df)
 
-join_table('..//Invent.db','..//Invent_2.db')
+#join_table('..//Invent.db','..//Invent_2.db')
 #ClearDB()
 
 
 
-num_kab_curent =317
+#num_kab_curent =317
 #CreateTable(num_kab_curent)
 #Append(num_kab_curent, str(269),'Тактический стул',num_kab_curent, 1)
 #Append(num_kab_curent, str(290),'Тактический веник',num_kab_curent, 1)
@@ -129,7 +128,7 @@ num_kab_curent =317
 
 '''
 for i in range(22):
-    Append(num_kab_curent, str(200+i),'Этот хакатон рот я его наоборот мл-инженеров из ВТБ и Дениса Сыропятова, ясно понятно',num_kab_curent, 1)
+    Append(num_kab_curent, str(200+i),'Этот хакатон  мл-инженеров из ВТБ и Дениса Сыропятова, ясно понятно',num_kab_curent, 1)
 
 '''
 
