@@ -7,7 +7,7 @@ import os
 
 
 def createQrCode(InvNumber):
-  str1 = InvNumber
+  str1 = str(InvNumber) #НомерКабинета_Инвентарник
   long_text_compressed = zlib.compress(str1.encode('utf-8'))
   qr = qrcode.QRCode(
       version=1,

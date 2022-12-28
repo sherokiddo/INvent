@@ -15,6 +15,101 @@ FAQ - информация
 
 
 
+
+
+'''
+
+Подвести итоги
+
+'''
+
+class Ui_Form_scr_4(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(1118, 701)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        Form.setFont(font)
+        Form.setTabletTracking(False)
+        Form.setFocusPolicy(QtCore.Qt.NoFocus)
+        Form.setStyleSheet("background-color: rgb(49, 49, 50);\n"
+"")
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(30, 30, 111, 61))
+        self.pushButton.setStyleSheet("border: 2px solid rgb(255, 255, 255);\n"
+"")
+        self.pushButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("UI_file/Group 3.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
+        self.pushButton.setIconSize(QtCore.QSize(160, 160))
+        self.pushButton.setShortcut("")
+        self.pushButton.setAutoRepeat(False)
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayoutWidget = QtWidgets.QWidget(Form)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(190, 100, 751, 461))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.textBrowser = QtWidgets.QTextBrowser(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        self.textBrowser.setFont(font)
+        self.textBrowser.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border: 2px solid rgb(255, 255, 255);")
+        self.textBrowser.setObjectName("textBrowser")
+        self.verticalLayout.addWidget(self.textBrowser)
+        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border: 2px solid rgb(255, 255, 255);\n"
+"border-radius: 15px;\n"
+"margin-top:10px;\n"
+"height: 50px;")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.verticalLayout.addWidget(self.pushButton_2)
+        self.pushButton_3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border: 2px solid rgb(255, 255, 255);\n"
+"border-radius: 15px;\n"
+"margin-top:10px;\n"
+"height: 50px;")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.verticalLayout.addWidget(self.pushButton_3)
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.pushButton.clicked.connect(self.return_scr)
+    def return_scr(self):
+        MainWindow.show()
+        Form_4.close()
+
+
+
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Пусто</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;\"><br /></p></body></html>"))
+        self.pushButton_2.setText(_translate("Form", "Всё верно"))
+        self.pushButton_3.setText(_translate("Form", "Исправить"))
+
+
+
+
+
+
 '''
 
 Создать ведомость 
@@ -165,7 +260,7 @@ class Ui_Form_scr_2(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.lineEdit.setPlaceholderText(_translate("Form", "      инвентарник"))
+        self.lineEdit.setPlaceholderText(_translate("Form", "      Номер Кабинета_Инвентарник, например 314_M001"))
         self.pushButton_2.setText(_translate("Form", "Создать"))
 
 
@@ -237,7 +332,7 @@ class Ui_Form_scr_1(object):
         try:
             s = self.lineEdit.text()
             s = s.split(', ')
-            CreateQR.createQrCode(s[0])
+            CreateQR.createQrCode(str(s[1])+'_'+str(s[0])) #Номер Кабинета_Инвентарник, например 314_M001
 
             SQL_method.Append(s[0],s[1],int(s[2]), int(s[3]))
 
@@ -250,11 +345,6 @@ class Ui_Form_scr_1(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.lineEdit.setPlaceholderText(_translate("Form", "      номер, название, кабинет, кол-во"))
         self.pushButton_2.setText(_translate("Form", "Создать"))
-
-
-
-
-
 
 
 class Ui_MainWindow(object):
@@ -366,6 +456,8 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.second_scr)
         self.pushButton.clicked.connect(self.third_scr)
         self.pushButton_5.clicked.connect(self.fourth_scr)
+        self.pushButton_4.clicked.connect(self.fifth_scr)
+
 
     def second_scr(self):
         Form_1.show()
@@ -377,6 +469,10 @@ class Ui_MainWindow(object):
 
     def fourth_scr(self):
         Form_3.show()
+        MainWindow.close()
+
+    def fifth_scr(self):
+        Form_4.show()
         MainWindow.close()
 
 
@@ -417,6 +513,11 @@ if __name__ == "__main__":
     Form_3 = QtWidgets.QWidget()
     ui_4 = Ui_Form_scr_3()
     ui_4.setupUi(Form_3)
+
+    ''' Подвести итоги '''
+    Form_4 = QtWidgets.QWidget()
+    ui_5 = Ui_Form_scr_4()
+    ui_5.setupUi(Form_4)
 
 
     sys.exit(app.exec_())
