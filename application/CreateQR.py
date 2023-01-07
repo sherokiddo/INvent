@@ -18,7 +18,7 @@ def createQrCode(InvNumber):
   qr.add_data(str1)
   qr.make(fit=True)
   img = qr.make_image(fill_color="black", back_color="white")
-  img.save("img/QrCode.png")
+  img.save(f"img/{str(InvNumber)}.png")
   return img
 
 

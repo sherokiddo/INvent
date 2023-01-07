@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 #from methods.Invetory_list import report
 import methods.Invetory_list as Invetory_list
-import methods.SQL_method as SQL_method
+import methods.DF_method as DF_method
 import CreateQR
 
 '''
@@ -76,10 +76,10 @@ class Ui_Form_scr_4(object):
         font.setPointSize(18)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border: 2px solid rgb(255, 255, 255);\n"
-"border-radius: 15px;\n"
-"margin-top:10px;\n"
-"height: 50px;")
+        "border: 2px solid rgb(255, 255, 255);\n"
+        "border-radius: 15px;\n"
+        "margin-top:10px;\n"
+        "height: 50px;")
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout.addWidget(self.pushButton_3)
 
@@ -176,7 +176,7 @@ class Ui_Form_scr_3(object):
     def creat_list(self):
         try:
             inventory = Invetory_list.report()
-            inventory.InputData(self.lineEdit.text())
+            inventory.InputData(int(self.lineEdit.text()))
         except Exception as e:
             print('Это не номер кабинета', e)
 
@@ -196,7 +196,7 @@ class Ui_Form_scr_3(object):
 Создать QR 
 
 '''
-class Ui_Form_scr_2(object):
+class Ui_Form_scr_2(object):  #инвертарник и кабинет
     def setupUi(self, Form):
         Form.setObjectName("Scr_2")
         Form.resize(1118, 701)
@@ -232,10 +232,10 @@ class Ui_Form_scr_2(object):
         font.setPointSize(18)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border: 2px solid rgb(255, 255, 255);\n"
-"border-radius: 15px;\n"
-"margin-top:10px;\n"
-"height: 50px;")
+                                        "border: 2px solid rgb(255, 255, 255);\n"
+                                        "border-radius: 15px;\n"
+                                        "margin-top:10px;\n"
+                                        "height: 50px;")
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_2.addWidget(self.pushButton_2)
 
@@ -251,6 +251,7 @@ class Ui_Form_scr_2(object):
 
     def create_qr(self):
         try:
+
             s = self.lineEdit.text()
             CreateQR.createQrCode(s)
 
@@ -332,9 +333,9 @@ class Ui_Form_scr_1(object):
         try:
             s = self.lineEdit.text()
             s = s.split(', ')
-            CreateQR.createQrCode(str(s[1])+'_'+str(s[0])) #Номер Кабинета_Инвентарник, например 314_M001
+            CreateQR.createQrCode(str(s[2])+'_'+str(s[0])) #Номер Кабинета_Инвентарник, например 314_M001
 
-            SQL_method.Append(s[0],s[1],int(s[2]), int(s[3]))
+            DF_method.append(s[0],s[1],int(s[2]), int(s[3]))
 
         except Exception as e:
             print('Ошибка в добавлении и создании ', e)
@@ -343,7 +344,7 @@ class Ui_Form_scr_1(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.lineEdit.setPlaceholderText(_translate("Form", "      номер, название, кабинет, кол-во"))
+        self.lineEdit.setPlaceholderText(_translate("Form", "      инвентарник, название, кабинет, кол-во"))
         self.pushButton_2.setText(_translate("Form", "Создать"))
 
 
@@ -427,10 +428,11 @@ class Ui_MainWindow(object):
         font.setPointSize(18)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border: 2px solid rgb(255, 255, 255);\n"
-"border-radius: 15px;\n"
-"margin-top:10px;\n"
-"height: 50px;")
+                                        "border: 2px solid rgb(255, 255, 255);\n"
+                                        "border-radius: 15px;\n"
+                                        "margin-top:10px;\n"
+                                        "height: 50px;\n")
+                                        #"QPushButton:hover {color: blue;}")
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout.addWidget(self.pushButton_3, 0, 0, 1, 1)
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
