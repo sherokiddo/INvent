@@ -97,7 +97,7 @@ class report(object):
                     count=41
 
         #sql.con.close()
-        file.save(f'Ведомости/{str(num_cab)}.xlsx')
+        file.save(f'Ведомости\\{str(num_cab)}.xlsx')
 
 
 '''

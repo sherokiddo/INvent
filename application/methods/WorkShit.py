@@ -4,7 +4,7 @@ from openpyxl import load_workbook
 from copy import copy
 def Connect():
     try:
-        file = load_workbook('methods/shit3.xlsx')
+        file = load_workbook('methods\\shit3.xlsx')
         return file
         print('Подключение успешное ')
     except Exception as ex:
